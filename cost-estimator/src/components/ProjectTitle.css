@@ -1,0 +1,15 @@
+.project-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.project-header h1 {
+  font-size: 32px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.project-header p {
+  color: #64748b;
+  font-size: 16px;
+}

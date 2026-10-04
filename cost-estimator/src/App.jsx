@@ -146,7 +146,7 @@ class ProjectCard extends React.Component {
 
 export default App; */
 
-import { Component } from "react";
+/*import { Component } from "react";
 import "./App.css";
 
 class App extends Component {
@@ -232,14 +232,14 @@ class App extends Component {
     return (
       <div className="app">
 
-        {/* Heading */}
+        // Heading //
         <h1>Estimation Table</h1>
 
         <p className="subtitle">
           Add tasks and calculate project cost
         </p>
 
-        {/* Add Button */}
+        // Add Button //
         <div className="button-container">
           <button
             className="add-button"
@@ -249,7 +249,7 @@ class App extends Component {
           </button>
         </div>
 
-        {/* Summary */}
+        // Summary //
         <div className="summary">
 
           <div className="summary-card">
@@ -271,7 +271,7 @@ class App extends Component {
 
         </div>
 
-        {/* Empty State */}
+        // Empty State //
         {tasks.length === 0 ? (
 
           <div className="empty-state">
@@ -284,7 +284,7 @@ class App extends Component {
 
         ) : (
 
-          /* Table */
+          // Table //
           <div className="table-container">
 
             <table>
@@ -306,7 +306,7 @@ class App extends Component {
 
                   <tr key={task.id}>
 
-                    {/* Name */}
+                    // Name //
                     <td>
                       <input
                         type="text"
@@ -322,7 +322,7 @@ class App extends Component {
                       />
                     </td>
 
-                    {/* Role */}
+                    // Role //
                     <td>
                       <select
                         value={task.role}
@@ -352,7 +352,7 @@ class App extends Component {
                       </select>
                     </td>
 
-                    {/* Hours */}
+                    // Hours //
                     <td>
                       <input
                         type="number"
@@ -368,7 +368,7 @@ class App extends Component {
                       />
                     </td>
 
-                    {/* Rate */}
+                    // Rate //
                     <td>
                       ₹
                       {this.roleRates[
@@ -376,7 +376,7 @@ class App extends Component {
                       ].toLocaleString()}
                     </td>
 
-                    {/* Cost */}
+                    // Cost //
                     <td className="cost">
 
                       {task.hours === 0
@@ -387,7 +387,7 @@ class App extends Component {
 
                     </td>
 
-                    {/* Delete */}
+                    // Delete //
                     <td>
                       <button
                         className="delete-button"
@@ -415,6 +415,165 @@ class App extends Component {
   }
 }
 
+export default App;  */
+
+
+
+
+
+
+/*  import { useEffect, useState } from "react";
+
+import ProjectTitle from "./components/ProjectTitle";
+import ProjectCard from "./components/ProjectCard";
+import SkeletonCard from "./components/SkeletonCard";
+import Message from "./components/Message";
+
+import {
+  getProjects,
+  getUsers
+} from "./Services/ProjectService.js";
+
+import { createUserLookup } from "./utils/userUtils";
+
+import "./App.css";
+
+function App() {
+  const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [retry, setRetry] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadData() {
+      setIsLoading(true);
+      setError("");
+
+      try {
+  // Keep skeleton cards visible for 2 seconds
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  if (controller.signal.aborted) return;
+
+  const [projectData, userData] = await Promise.all([
+    getProjects({ signal: controller.signal }),
+    getUsers({ signal: controller.signal })
+  ]);
+
+  setProjects(projectData);
+  setUsers(userData);
+} catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err.message || "Something went wrong");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadData();
+
+    return () => {
+      controller.abort();
+    };
+  }, [retry]);
+
+  const nameById = createUserLookup(users);
+
+  function handleRetry() {
+    setRetry((previous) => previous + 1);
+  }
+
+  return (
+    <main className="app-container">
+      <ProjectTitle />
+
+      {isLoading && (
+        <div className="project-grid">
+          {[1, 2, 3].map((item) => (
+            <SkeletonCard key={item} />
+          ))}
+        </div>
+      )}
+
+      {!isLoading && error && (
+        <Message type="error">
+          <p>{error}</p>
+          <button onClick={handleRetry}>Try Again</button>
+        </Message>
+      )}
+
+      {!isLoading && !error && projects.length === 0 && (
+        <Message type="empty">
+          No projects available.
+        </Message>
+      )}
+
+      {!isLoading && !error && projects.length > 0 && (
+        <div className="project-grid">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              data={project}
+              ownerName={nameById[project.ownerId] || "Unknown"}
+            />
+          ))}
+        </div>
+      )}
+    </main>
+  );
+}
+
+export default App;  */
+
+
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+
+import AppLayout from "./components/AppLayout";
+import CreateProject from "./pages/CreateProject";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Projects from "./pages/Projects";
+import ProjectEstimate from "./pages/ProjectEstimate";
+import ProjectLayout from "./pages/ProjectLayout";
+import ProjectOverview from "./pages/ProjectOverview";
+import ProjectTeam from "./pages/ProjectTeam";
+import "./App.css";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/create-project" element={<CreateProject />} />
+
+          <Route path="/projects/:projectId" element={<ProjectLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<ProjectOverview />} />
+            <Route path="estimate" element={<ProjectEstimate />} />
+            <Route path="team" element={<ProjectTeam />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
 export default App;
-
-

@@ -1,0 +1,90 @@
+{
+  "projects": [
+    {
+      "id": "p1",
+      "name": "E-Commerce Website",
+      "description": "Online shopping application",
+      "owner": "Jahnavi",
+      "client": "ABC Technologies",
+      "status": "In Progress",
+      "startDate": "2025-01-10",
+      "endDate": "2025-05-20",
+      "hours": 120,
+      "totalHours": 120,
+      "estimate": 75000,
+      "finalCost": 75000,
+      "team": [
+        "Jahnavi",
+        "Susila",
+        "Subbu"
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Banking Application",
+      "description": "Bank management application",
+      "owner": "Susila",
+      "client": "XYZ Bank",
+      "status": "Completed",
+      "startDate": "2024-11-12",
+      "endDate": "2025-03-30",
+      "hours": 180,
+      "totalHours": 180,
+      "estimate": 95000,
+      "finalCost": 95000,
+      "team": [
+        "Susila",
+        "Rahul"
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Student Management System",
+      "description": "Student records application",
+      "owner": "Subbu",
+      "client": "ABC College",
+      "status": "Pending",
+      "startDate": "2025-02-05",
+      "endDate": "2025-06-25",
+      "hours": 90,
+      "totalHours": 90,
+      "estimate": 50000,
+      "finalCost": 50000,
+      "team": [
+        "Subbu",
+        "Jahnavi"
+      ]
+    },
+    {
+      "id": "rZLq8z9FZx8",
+      "name": "Java",
+      "description": "Process associate",
+      "owner": "Sushma",
+      "client": "Wipro",
+      "status": "In Progress",
+      "startDate": "2025-09-10",
+      "endDate": "2026-11-05",
+      "hours": 3,
+      "totalHours": 3,
+      "estimate": 80000,
+      "finalCost": 80000,
+      "team": []
+    },
+    {
+      "id": "zqspYwYQpuQ",
+      "name": "Python Developer",
+      "description": "Data analytics",
+      "owner": "Priya",
+      "client": "Genpact",
+      "status": "Completed",
+      "startDate": "2025-05-01",
+      "endDate": "2026-07-02",
+      "hours": 9,
+      "totalHours": 9,
+      "estimate": 90000,
+      "finalCost": 90000,
+      "team": []
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
